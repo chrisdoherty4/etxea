@@ -1,0 +1,30 @@
+syntax = "proto3";
+package xavier.v1;
+
+// ProviderPluginService represents a plugin. The server is implemented in the plugin, the client is used
+// by the main process.
+service ProviderPluginService {
+    rpc Init(InitRequest) returns (InitResponse);
+    rpc Call(CallRequest) returns (CallResponse);
+}
+
+message InitRequest {
+    uint32 event_agent = 1;
+}
+message InitResponse {}
+
+message CallRequest {
+    string key = 1;
+}
+message CallResponse {}
+
+// BindingAgent is used by a plugin to bind to events. Server is implemented by the main process,
+// client used by plugin.
+service EventAgentService {
+    rpc Bind(BindRequest) returns (BindResponse);
+}
+
+message BindRequest {
+    string key = 1;
+}
+message BindResponse {}
