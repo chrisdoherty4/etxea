@@ -18,9 +18,9 @@ message CallRequest {
 }
 message CallResponse {}
 
-// BindingAgent is used by a plugin to bind to events. Server is implemented by the main process,
-// client used by plugin.
-service EventAgentService {
+// BindingAgentService is used by a plugin to bind to events. Server is implemented by the main 
+// process, client used by plugin.
+service BindingAgentService {
     rpc Bind(BindRequest) returns (BindResponse);
 }
 

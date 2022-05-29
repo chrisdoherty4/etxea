@@ -134,84 +134,84 @@ var ProviderPluginService_ServiceDesc = grpc.ServiceDesc{
 	Metadata: "xavier/v1/xavier.proto",
 }
 
-// EventAgentServiceClient is the client API for EventAgentService service.
+// BindingAgentServiceClient is the client API for BindingAgentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type EventAgentServiceClient interface {
+type BindingAgentServiceClient interface {
 	Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error)
 }
 
-type eventAgentServiceClient struct {
+type bindingAgentServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewEventAgentServiceClient(cc grpc.ClientConnInterface) EventAgentServiceClient {
-	return &eventAgentServiceClient{cc}
+func NewBindingAgentServiceClient(cc grpc.ClientConnInterface) BindingAgentServiceClient {
+	return &bindingAgentServiceClient{cc}
 }
 
-func (c *eventAgentServiceClient) Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error) {
+func (c *bindingAgentServiceClient) Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error) {
 	out := new(BindResponse)
-	err := c.cc.Invoke(ctx, "/xavier.v1.EventAgentService/Bind", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/xavier.v1.BindingAgentService/Bind", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// EventAgentServiceServer is the server API for EventAgentService service.
-// All implementations should embed UnimplementedEventAgentServiceServer
+// BindingAgentServiceServer is the server API for BindingAgentService service.
+// All implementations should embed UnimplementedBindingAgentServiceServer
 // for forward compatibility
-type EventAgentServiceServer interface {
+type BindingAgentServiceServer interface {
 	Bind(context.Context, *BindRequest) (*BindResponse, error)
 }
 
-// UnimplementedEventAgentServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedEventAgentServiceServer struct {
+// UnimplementedBindingAgentServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedBindingAgentServiceServer struct {
 }
 
-func (UnimplementedEventAgentServiceServer) Bind(context.Context, *BindRequest) (*BindResponse, error) {
+func (UnimplementedBindingAgentServiceServer) Bind(context.Context, *BindRequest) (*BindResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Bind not implemented")
 }
 
-// UnsafeEventAgentServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to EventAgentServiceServer will
+// UnsafeBindingAgentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BindingAgentServiceServer will
 // result in compilation errors.
-type UnsafeEventAgentServiceServer interface {
-	mustEmbedUnimplementedEventAgentServiceServer()
+type UnsafeBindingAgentServiceServer interface {
+	mustEmbedUnimplementedBindingAgentServiceServer()
 }
 
-func RegisterEventAgentServiceServer(s grpc.ServiceRegistrar, srv EventAgentServiceServer) {
-	s.RegisterService(&EventAgentService_ServiceDesc, srv)
+func RegisterBindingAgentServiceServer(s grpc.ServiceRegistrar, srv BindingAgentServiceServer) {
+	s.RegisterService(&BindingAgentService_ServiceDesc, srv)
 }
 
-func _EventAgentService_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BindingAgentService_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BindRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EventAgentServiceServer).Bind(ctx, in)
+		return srv.(BindingAgentServiceServer).Bind(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/xavier.v1.EventAgentService/Bind",
+		FullMethod: "/xavier.v1.BindingAgentService/Bind",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EventAgentServiceServer).Bind(ctx, req.(*BindRequest))
+		return srv.(BindingAgentServiceServer).Bind(ctx, req.(*BindRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// EventAgentService_ServiceDesc is the grpc.ServiceDesc for EventAgentService service.
+// BindingAgentService_ServiceDesc is the grpc.ServiceDesc for BindingAgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var EventAgentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "xavier.v1.EventAgentService",
-	HandlerType: (*EventAgentServiceServer)(nil),
+var BindingAgentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "xavier.v1.BindingAgentService",
+	HandlerType: (*BindingAgentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Bind",
-			Handler:    _EventAgentService_Bind_Handler,
+			Handler:    _BindingAgentService_Bind_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
