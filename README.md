@@ -1,6 +1,6 @@
-# Xavier
+# Etxea ('house' in Basque)
 
-A go-plugin proof of concept.
+A go-plugin proof of concept. The core set of packages under `pkg` house the components for building a plugin. Gela ('room' in Baseque) is a plugin that leverages the capabilities.
 
 ## Experiments
 
@@ -32,4 +32,4 @@ If the plugin framework is defined in xavier, can plugins leverage that and be d
 
 - Inputs from 1 stage to the next
 - Initialization and desctruction similar to a testing framework. Do we need per stage and 1 wrapper?
-- Stage ordering. 
+- Stage ordering.
