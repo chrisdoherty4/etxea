@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/chrisdoherty4/xavier/internal/app/etxea"
-	"github.com/chrisdoherty4/xavier/internal/pkg/cmdutil"
+	"github.com/chrisdoherty4/xavier/etxea/app/etxea"
+	"github.com/chrisdoherty4/xavier/xavier/pkg/cmdutil"
 )
 
 func main() {

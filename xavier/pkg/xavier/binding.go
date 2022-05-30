@@ -3,7 +3,7 @@ package xavier
 import (
 	"context"
 
-	xavierv1 "github.com/chrisdoherty4/xavier/internal/pkg/api/xavier/v1"
+	xavierv1 "github.com/chrisdoherty4/xavier/xavier/pkg/api/xavier/v1"
 	"github.com/hashicorp/go-plugin"
 	"google.golang.org/grpc"
 )

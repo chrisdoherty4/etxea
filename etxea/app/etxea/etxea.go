@@ -1,7 +1,7 @@
 package etxea
 
 import (
-	"github.com/chrisdoherty4/xavier/internal/pkg/etxea"
+	"github.com/chrisdoherty4/xavier/etxea/pkg/etxea"
 	"github.com/hashicorp/go-plugin"
 )
 
