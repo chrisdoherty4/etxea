@@ -8,10 +8,11 @@ import (
 // Entrypoint is a command entrypoint.
 type Entrypoint func(args []string) error
 
-// Execute executes a command entrypoint.
+// Execute  a command entrypoint. If app returns an error, Execute prints the error and exits the
+// program with a non-zero code.
 func Execute(app Entrypoint) {
 	if err := app(os.Args); err != nil {
-		fmt.Fprintln(os.Stderr, err.Error())
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err.Error())
 		os.Exit(1)
 	}
 }

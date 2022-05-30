@@ -19,7 +19,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProviderPluginServiceClient interface {
 	Init(ctx context.Context, in *InitRequest, opts ...grpc.CallOption) (*InitResponse, error)
-	Call(ctx context.Context, in *CallRequest, opts ...grpc.CallOption) (*CallResponse, error)
 }
 
 type providerPluginServiceClient struct {
@@ -39,21 +38,11 @@ func (c *providerPluginServiceClient) Init(ctx context.Context, in *InitRequest,
 	return out, nil
 }
 
-func (c *providerPluginServiceClient) Call(ctx context.Context, in *CallRequest, opts ...grpc.CallOption) (*CallResponse, error) {
-	out := new(CallResponse)
-	err := c.cc.Invoke(ctx, "/xavier.v1.ProviderPluginService/Call", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ProviderPluginServiceServer is the server API for ProviderPluginService service.
 // All implementations should embed UnimplementedProviderPluginServiceServer
 // for forward compatibility
 type ProviderPluginServiceServer interface {
 	Init(context.Context, *InitRequest) (*InitResponse, error)
-	Call(context.Context, *CallRequest) (*CallResponse, error)
 }
 
 // UnimplementedProviderPluginServiceServer should be embedded to have forward compatible implementations.
@@ -62,9 +51,6 @@ type UnimplementedProviderPluginServiceServer struct {
 
 func (UnimplementedProviderPluginServiceServer) Init(context.Context, *InitRequest) (*InitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Init not implemented")
-}
-func (UnimplementedProviderPluginServiceServer) Call(context.Context, *CallRequest) (*CallResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
 }
 
 // UnsafeProviderPluginServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -96,24 +82,6 @@ func _ProviderPluginService_Init_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProviderPluginService_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CallRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProviderPluginServiceServer).Call(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/xavier.v1.ProviderPluginService/Call",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProviderPluginServiceServer).Call(ctx, req.(*CallRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ProviderPluginService_ServiceDesc is the grpc.ServiceDesc for ProviderPluginService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -124,94 +92,6 @@ var ProviderPluginService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Init",
 			Handler:    _ProviderPluginService_Init_Handler,
-		},
-		{
-			MethodName: "Call",
-			Handler:    _ProviderPluginService_Call_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "xavier/v1/xavier.proto",
-}
-
-// BindingAgentServiceClient is the client API for BindingAgentService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BindingAgentServiceClient interface {
-	Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error)
-}
-
-type bindingAgentServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewBindingAgentServiceClient(cc grpc.ClientConnInterface) BindingAgentServiceClient {
-	return &bindingAgentServiceClient{cc}
-}
-
-func (c *bindingAgentServiceClient) Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error) {
-	out := new(BindResponse)
-	err := c.cc.Invoke(ctx, "/xavier.v1.BindingAgentService/Bind", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BindingAgentServiceServer is the server API for BindingAgentService service.
-// All implementations should embed UnimplementedBindingAgentServiceServer
-// for forward compatibility
-type BindingAgentServiceServer interface {
-	Bind(context.Context, *BindRequest) (*BindResponse, error)
-}
-
-// UnimplementedBindingAgentServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedBindingAgentServiceServer struct {
-}
-
-func (UnimplementedBindingAgentServiceServer) Bind(context.Context, *BindRequest) (*BindResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Bind not implemented")
-}
-
-// UnsafeBindingAgentServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BindingAgentServiceServer will
-// result in compilation errors.
-type UnsafeBindingAgentServiceServer interface {
-	mustEmbedUnimplementedBindingAgentServiceServer()
-}
-
-func RegisterBindingAgentServiceServer(s grpc.ServiceRegistrar, srv BindingAgentServiceServer) {
-	s.RegisterService(&BindingAgentService_ServiceDesc, srv)
-}
-
-func _BindingAgentService_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BindRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BindingAgentServiceServer).Bind(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/xavier.v1.BindingAgentService/Bind",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BindingAgentServiceServer).Bind(ctx, req.(*BindRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// BindingAgentService_ServiceDesc is the grpc.ServiceDesc for BindingAgentService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var BindingAgentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "xavier.v1.BindingAgentService",
-	HandlerType: (*BindingAgentServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Bind",
-			Handler:    _BindingAgentService_Bind_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

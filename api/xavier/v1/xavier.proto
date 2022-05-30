@@ -5,26 +5,28 @@ package xavier.v1;
 // by the main process.
 service ProviderPluginService {
     rpc Init(InitRequest) returns (InitResponse);
-    rpc Call(CallRequest) returns (CallResponse);
+    // rpc Call(CallRequest) returns (CallResponse);
 }
 
 message InitRequest {
-    uint32 event_agent = 1;
+    string message = 1;
 }
-message InitResponse {}
-
-message CallRequest {
-    string key = 1;
-}
-message CallResponse {}
-
-// BindingAgentService is used by a plugin to bind to events. Server is implemented by the main 
-// process, client used by plugin.
-service BindingAgentService {
-    rpc Bind(BindRequest) returns (BindResponse);
+message InitResponse {
+    string message = 1;
 }
 
-message BindRequest {
-    string key = 1;
-}
-message BindResponse {}
+// message CallRequest {
+//     string key = 1;
+// }
+// message CallResponse {}
+
+// // BindingAgentService is used by a plugin to bind to events. Server is implemented by the main 
+// // process, client used by plugin.
+// service BindingAgentService {
+//     rpc Bind(BindRequest) returns (BindResponse);
+// }
+
+// message BindRequest {
+//     string key = 1;
+// }
+// message BindResponse {}
