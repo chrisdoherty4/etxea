@@ -1,8 +1,10 @@
 package etxea
 
 import (
+	"context"
 	"os/exec"
 
+	etxeav1 "github.com/chrisdoherty4/etxea/pkg/api/etxea/v1"
 	"github.com/hashicorp/go-plugin"
 )
 
@@ -21,8 +23,13 @@ func Run(args []string) error {
 		return err
 	}
 
-	_, err = rpcClient.Dispense(BindingsPluginName)
+	rawClient, err := rpcClient.Dispense(BindingsPluginName)
 	if err != nil {
+		return err
+	}
+
+	client := rawClient.(etxeav1.BindingServiceClient)
+	if _, err := client.Bind(context.Background(), &etxeav1.Empty{}); err != nil {
 		return err
 	}
 

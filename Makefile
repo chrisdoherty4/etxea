@@ -6,6 +6,10 @@ BUF_IMAGE := bufbuild/buf:1.4.0
 .PHONY: build
 build: cmd/etxea cmd/etxea-gela
 
+.PHONY: run
+run:
+	bin/etxea bin/etxea-gela
+
 .PHONY: cmd/etxea
 cmd/etxea:
 	$(GO) build -o bin/etxea ./cmd/etxea

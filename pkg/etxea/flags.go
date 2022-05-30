@@ -25,3 +25,7 @@ func (f *FlagsPlugin) GRPCClient(ctx context.Context, broker *plugin.GRPCBroker,
 
 // FlagsService is the actual implemetation.
 type FlagsService struct{}
+
+func (f *FlagsService) Define(context.Context, *etxeav1.Empty) (*etxeav1.Empty, error) {
+	return &etxeav1.Empty{}, nil
+}

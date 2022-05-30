@@ -16,6 +16,14 @@ Can we provide pluggable CLI flags. A generic solution that can be bound to any 
 
 Hashicorp's plugin mechanism lets you list plugins and 'dispense' a particular one. Is this an avenue to providing the different stages that we perhaps bind within?
 
+On trying to use an unconfigured plugin the system simply returns an error.
+
+```
+Error: rpc error: code = Unimplemented desc = unknown service etxea.v1.BindingService
+```
+
+We could test for the `Unimplemented` code and look at the description (considering it comes from gRPC itself) to see if it matches a service. If the full service isn't implemented then we can ignore that stage and move on to the next making plugins opt in for authors.
+
 #### Discovery
 
 If the plugin framework is defined in xavier, can plugins leverage that and be discoverable? This seems to be how Terraform (and probably other HashiCorp products) work and makes sense given the plugin host needs to define expected behavior, not the plugin.

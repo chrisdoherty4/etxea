@@ -1,6 +1,13 @@
 syntax = "proto3";
 package etxea.v1;
 
-service BindingService {}
+service BindingService {
+    rpc Bind(Empty) returns (Empty);
+}
 
-service FlagService {}
+service FlagService {
+    rpc Define(Empty) returns (Empty);
+}
+
+
+message Empty {}

@@ -3,7 +3,10 @@
 package etxeav1
 
 import (
+	context "context"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -15,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BindingServiceClient interface {
+	Bind(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type bindingServiceClient struct {
@@ -25,14 +29,28 @@ func NewBindingServiceClient(cc grpc.ClientConnInterface) BindingServiceClient {
 	return &bindingServiceClient{cc}
 }
 
+func (c *bindingServiceClient) Bind(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etxea.v1.BindingService/Bind", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BindingServiceServer is the server API for BindingService service.
 // All implementations should embed UnimplementedBindingServiceServer
 // for forward compatibility
 type BindingServiceServer interface {
+	Bind(context.Context, *Empty) (*Empty, error)
 }
 
 // UnimplementedBindingServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedBindingServiceServer struct {
+}
+
+func (UnimplementedBindingServiceServer) Bind(context.Context, *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Bind not implemented")
 }
 
 // UnsafeBindingServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -46,21 +64,45 @@ func RegisterBindingServiceServer(s grpc.ServiceRegistrar, srv BindingServiceSer
 	s.RegisterService(&BindingService_ServiceDesc, srv)
 }
 
+func _BindingService_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BindingServiceServer).Bind(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etxea.v1.BindingService/Bind",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BindingServiceServer).Bind(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BindingService_ServiceDesc is the grpc.ServiceDesc for BindingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BindingService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "etxea.v1.BindingService",
 	HandlerType: (*BindingServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "etxea/v1/etxea.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Bind",
+			Handler:    _BindingService_Bind_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "etxea/v1/etxea.proto",
 }
 
 // FlagServiceClient is the client API for FlagService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FlagServiceClient interface {
+	Define(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type flagServiceClient struct {
@@ -71,14 +113,28 @@ func NewFlagServiceClient(cc grpc.ClientConnInterface) FlagServiceClient {
 	return &flagServiceClient{cc}
 }
 
+func (c *flagServiceClient) Define(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/etxea.v1.FlagService/Define", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlagServiceServer is the server API for FlagService service.
 // All implementations should embed UnimplementedFlagServiceServer
 // for forward compatibility
 type FlagServiceServer interface {
+	Define(context.Context, *Empty) (*Empty, error)
 }
 
 // UnimplementedFlagServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedFlagServiceServer struct {
+}
+
+func (UnimplementedFlagServiceServer) Define(context.Context, *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Define not implemented")
 }
 
 // UnsafeFlagServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -92,13 +148,36 @@ func RegisterFlagServiceServer(s grpc.ServiceRegistrar, srv FlagServiceServer) {
 	s.RegisterService(&FlagService_ServiceDesc, srv)
 }
 
+func _FlagService_Define_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlagServiceServer).Define(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etxea.v1.FlagService/Define",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlagServiceServer).Define(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FlagService_ServiceDesc is the grpc.ServiceDesc for FlagService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FlagService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "etxea.v1.FlagService",
 	HandlerType: (*FlagServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "etxea/v1/etxea.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Define",
+			Handler:    _FlagService_Define_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "etxea/v1/etxea.proto",
 }
