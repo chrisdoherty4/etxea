@@ -16,3 +16,6 @@
 
 # Binary directories
 /bin
+
+# Ignore vscode logging
+/.vscode/*.log
