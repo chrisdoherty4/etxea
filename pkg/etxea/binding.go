@@ -1,9 +1,9 @@
-package xavier
+package etxea
 
 import (
 	"context"
 
-	xavierv1 "github.com/chrisdoherty4/xavier/xavier/pkg/api/xavier/v1"
+	etxeav1 "github.com/chrisdoherty4/etxea/pkg/api/etxea/v1"
 	"github.com/hashicorp/go-plugin"
 	"google.golang.org/grpc"
 )
@@ -15,12 +15,12 @@ type BindingsPlugin struct {
 }
 
 func (p *BindingsPlugin) GRPCServer(broker *plugin.GRPCBroker, s *grpc.Server) error {
-	xavierv1.RegisterBindingServiceServer(s, &BindingsService{})
+	etxeav1.RegisterBindingServiceServer(s, &BindingsService{})
 	return nil
 }
 
 func (p *BindingsPlugin) GRPCClient(ctx context.Context, broker *plugin.GRPCBroker, c *grpc.ClientConn) (interface{}, error) {
-	return xavierv1.NewBindingServiceClient(c), nil
+	return etxeav1.NewBindingServiceClient(c), nil
 }
 
 type BindingsService struct{}

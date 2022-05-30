@@ -1,4 +1,4 @@
-package xavier
+package etxea
 
 import (
 	"github.com/hashicorp/go-plugin"

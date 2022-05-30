@@ -1,4 +1,4 @@
-module github.com/chrisdoherty4/xavier
+module github.com/chrisdoherty4/etxea
 
 go 1.18
 

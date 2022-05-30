@@ -1,17 +1,16 @@
-package xavier
+package etxea
 
 import (
 	"os/exec"
 
-	"github.com/chrisdoherty4/xavier/xavier/pkg/xavier"
 	"github.com/hashicorp/go-plugin"
 )
 
-// Run executes the xavier program.
+// Run executes the etxea program.
 func Run(args []string) error {
 	pluginClient := plugin.NewClient(&plugin.ClientConfig{
-		HandshakeConfig:  xavier.Handshake,
-		Plugins:          xavier.Plugins,
+		HandshakeConfig:  Handshake,
+		Plugins:          Plugins,
 		Cmd:              exec.Command(args[1]),
 		AllowedProtocols: []plugin.Protocol{plugin.ProtocolGRPC},
 	})
@@ -22,7 +21,7 @@ func Run(args []string) error {
 		return err
 	}
 
-	_, err = rpcClient.Dispense(xavier.BindingsPluginName)
+	_, err = rpcClient.Dispense(BindingsPluginName)
 	if err != nil {
 		return err
 	}

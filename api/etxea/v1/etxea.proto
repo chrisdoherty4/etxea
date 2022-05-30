@@ -1,5 +1,5 @@
 syntax = "proto3";
-package xavier.v1;
+package etxea.v1;
 
 service BindingService {}
 

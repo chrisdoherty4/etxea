@@ -4,15 +4,15 @@ GO := go
 BUF_IMAGE := bufbuild/buf:1.4.0
 
 .PHONY: build
-build: cmd/xavier cmd/xavier-etxea
+build: cmd/etxea cmd/etxea-gela
 
-.PHONY: cmd/xavier
-cmd/xavier:
-	$(GO) build -o bin/xavier ./cmd/xavier
+.PHONY: cmd/etxea
+cmd/etxea:
+	$(GO) build -o bin/etxea ./cmd/etxea
 
-.PHONY: cmd/xavier-etxea
-cmd/xavier-etxea:
-	$(GO) build -o bin/xavier-etxea ./cmd/xavier-etxea
+.PHONY: cmd/etxea-gela
+cmd/etxea-gela:
+	$(GO) build -o bin/etxea-gela ./cmd/etxea-gela
 
 buf-build:
 	$(DOCKER) run -v$$PWD:$$PWD -w$$PWD $(BUF_IMAGE) build
