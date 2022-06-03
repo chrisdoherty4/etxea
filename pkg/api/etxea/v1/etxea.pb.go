@@ -20,14 +20,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Empty struct {
+// TODO(chrisdoherty4) Define stage binding.
+type BindRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *Empty) Reset() {
-	*x = Empty{}
+func (x *BindRequest) Reset() {
+	*x = BindRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_etxea_v1_etxea_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -35,13 +36,13 @@ func (x *Empty) Reset() {
 	}
 }
 
-func (x *Empty) String() string {
+func (x *BindRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Empty) ProtoMessage() {}
+func (*BindRequest) ProtoMessage() {}
 
-func (x *Empty) ProtoReflect() protoreflect.Message {
+func (x *BindRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_etxea_v1_etxea_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,9 +54,312 @@ func (x *Empty) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
-func (*Empty) Descriptor() ([]byte, []int) {
+// Deprecated: Use BindRequest.ProtoReflect.Descriptor instead.
+func (*BindRequest) Descriptor() ([]byte, []int) {
 	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{0}
+}
+
+type BindResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *BindResponse) Reset() {
+	*x = BindResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BindResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindResponse) ProtoMessage() {}
+
+func (x *BindResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindResponse.ProtoReflect.Descriptor instead.
+func (*BindResponse) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{1}
+}
+
+// GetFlagsRequest is dispatched when the host process asks a flag set to populate on a CLI command.
+type GetFlagsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The command id uniquely identifies a command registered on the CLI. Idents take the
+	// form `create.cluster` where `create` is a subcommand of the root command and `create` is a
+	// subcommand of `create`.
+	CommandId string `protobuf:"bytes,1,opt,name=command_id,json=commandId,proto3" json:"command_id,omitempty"`
+}
+
+func (x *GetFlagsRequest) Reset() {
+	*x = GetFlagsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFlagsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFlagsRequest) ProtoMessage() {}
+
+func (x *GetFlagsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFlagsRequest.ProtoReflect.Descriptor instead.
+func (*GetFlagsRequest) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetFlagsRequest) GetCommandId() string {
+	if x != nil {
+		return x.CommandId
+	}
+	return ""
+}
+
+// GetFlagsResponse is returned when a host process asks a plugin for flags.
+type GetFlagsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Flags []*Flag `protobuf:"bytes,1,rep,name=flags,proto3" json:"flags,omitempty"`
+}
+
+func (x *GetFlagsResponse) Reset() {
+	*x = GetFlagsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFlagsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFlagsResponse) ProtoMessage() {}
+
+func (x *GetFlagsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFlagsResponse.ProtoReflect.Descriptor instead.
+func (*GetFlagsResponse) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetFlagsResponse) GetFlags() []*Flag {
+	if x != nil {
+		return x.Flags
+	}
+	return nil
+}
+
+// Flag defines the properties in a CLI's flag set.
+type Flag struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name of the flag.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Description used to populate help menus.
+	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	// An optional default for the flag.
+	Default string `protobuf:"bytes,4,opt,name=default,proto3" json:"default,omitempty"`
+}
+
+func (x *Flag) Reset() {
+	*x = Flag{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Flag) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Flag) ProtoMessage() {}
+
+func (x *Flag) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Flag.ProtoReflect.Descriptor instead.
+func (*Flag) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Flag) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Flag) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Flag) GetDefault() string {
+	if x != nil {
+		return x.Default
+	}
+	return ""
+}
+
+// ParseRequest is dispatched when the CLI asks a plugin to parse arguments.
+type ParseRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// command_id is the ID uniquely identifying the command used to register flags. It will match
+	// the IDs issues in GetFlagsRequest.
+	CommandId string `protobuf:"bytes,1,opt,name=command_id,json=commandId,proto3" json:"command_id,omitempty"`
+	// Args are the raw, unparsed arguments received by the CLI.
+	Args []string `protobuf:"bytes,2,rep,name=args,proto3" json:"args,omitempty"`
+}
+
+func (x *ParseRequest) Reset() {
+	*x = ParseRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ParseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseRequest) ProtoMessage() {}
+
+func (x *ParseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseRequest.ProtoReflect.Descriptor instead.
+func (*ParseRequest) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ParseRequest) GetCommandId() string {
+	if x != nil {
+		return x.CommandId
+	}
+	return ""
+}
+
+func (x *ParseRequest) GetArgs() []string {
+	if x != nil {
+		return x.Args
+	}
+	return nil
+}
+
+// PraseResponse is returned when the host process asks a plugin to parse flags. It has no fields
+// as the caller is expected to return a gRPC error should the input be invalid.
+type ParseResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ParseResponse) Reset() {
+	*x = ParseResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_etxea_v1_etxea_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ParseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseResponse) ProtoMessage() {}
+
+func (x *ParseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_etxea_v1_etxea_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
+func (*ParseResponse) Descriptor() ([]byte, []int) {
+	return file_etxea_v1_etxea_proto_rawDescGZIP(), []int{6}
 }
 
 var File_etxea_v1_etxea_proto protoreflect.FileDescriptor
@@ -63,24 +367,49 @@ var File_etxea_v1_etxea_proto protoreflect.FileDescriptor
 var file_etxea_v1_etxea_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x74, 0x78, 0x65, 0x61,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31,
-	0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x32, 0x3a, 0x0a, 0x0e, 0x42, 0x69, 0x6e,
-	0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x28, 0x0a, 0x04, 0x42,
-	0x69, 0x6e, 0x64, 0x12, 0x0f, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x45,
-	0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0f, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x32, 0x39, 0x0a, 0x0b, 0x46, 0x6c, 0x61, 0x67, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x06, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x65, 0x12, 0x0f,
-	0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
-	0x0f, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
-	0x42, 0x95, 0x01, 0x0a, 0x0c, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76,
-	0x31, 0x42, 0x0a, 0x45, 0x74, 0x78, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
-	0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x68, 0x72, 0x69,
-	0x73, 0x64, 0x6f, 0x68, 0x65, 0x72, 0x74, 0x79, 0x34, 0x2f, 0x78, 0x61, 0x76, 0x69, 0x65, 0x72,
-	0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2f, 0x76,
-	0x31, 0x3b, 0x65, 0x74, 0x78, 0x65, 0x61, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x45, 0x58, 0x58, 0xaa,
-	0x02, 0x08, 0x45, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x08, 0x45, 0x74, 0x78,
-	0x65, 0x61, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x14, 0x45, 0x74, 0x78, 0x65, 0x61, 0x5c, 0x56, 0x31,
-	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x09, 0x45,
-	0x74, 0x78, 0x65, 0x61, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x0d, 0x0a, 0x0b, 0x42, 0x69, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
+	0x0e, 0x0a, 0x0c, 0x42, 0x69, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x30, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x49,
+	0x64, 0x22, 0x38, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x05, 0x66, 0x6c, 0x61, 0x67, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e,
+	0x46, 0x6c, 0x61, 0x67, 0x52, 0x05, 0x66, 0x6c, 0x61, 0x67, 0x73, 0x22, 0x56, 0x0a, 0x04, 0x46,
+	0x6c, 0x61, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72,
+	0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65,
+	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x64, 0x65, 0x66,
+	0x61, 0x75, 0x6c, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x64, 0x65, 0x66, 0x61,
+	0x75, 0x6c, 0x74, 0x22, 0x41, 0x0a, 0x0c, 0x50, 0x61, 0x72, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64,
+	0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x61, 0x72, 0x67, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x04, 0x61, 0x72, 0x67, 0x73, 0x22, 0x0f, 0x0a, 0x0d, 0x50, 0x61, 0x72, 0x73, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x47, 0x0a, 0x0e, 0x42, 0x69, 0x6e, 0x64, 0x69,
+	0x6e, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x35, 0x0a, 0x04, 0x42, 0x69, 0x6e,
+	0x64, 0x12, 0x15, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x42, 0x69, 0x6e,
+	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61,
+	0x2e, 0x76, 0x31, 0x2e, 0x42, 0x69, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x32, 0x8a, 0x01, 0x0a, 0x0b, 0x46, 0x6c, 0x61, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x12, 0x41, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73, 0x12, 0x19, 0x2e, 0x65,
+	0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x05, 0x50, 0x61, 0x72, 0x73, 0x65, 0x12, 0x16, 0x2e, 0x65,
+	0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x73, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x2e,
+	0x50, 0x61, 0x72, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x95, 0x01,
+	0x0a, 0x0c, 0x63, 0x6f, 0x6d, 0x2e, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2e, 0x76, 0x31, 0x42, 0x0a,
+	0x45, 0x74, 0x78, 0x65, 0x61, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x68, 0x72, 0x69, 0x73, 0x64, 0x6f,
+	0x68, 0x65, 0x72, 0x74, 0x79, 0x34, 0x2f, 0x78, 0x61, 0x76, 0x69, 0x65, 0x72, 0x2f, 0x70, 0x6b,
+	0x67, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x65, 0x74, 0x78, 0x65, 0x61, 0x2f, 0x76, 0x31, 0x3b, 0x65,
+	0x74, 0x78, 0x65, 0x61, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x45, 0x58, 0x58, 0xaa, 0x02, 0x08, 0x45,
+	0x74, 0x78, 0x65, 0x61, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x08, 0x45, 0x74, 0x78, 0x65, 0x61, 0x5c,
+	0x56, 0x31, 0xe2, 0x02, 0x14, 0x45, 0x74, 0x78, 0x65, 0x61, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x09, 0x45, 0x74, 0x78, 0x65,
+	0x61, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -95,20 +424,29 @@ func file_etxea_v1_etxea_proto_rawDescGZIP() []byte {
 	return file_etxea_v1_etxea_proto_rawDescData
 }
 
-var file_etxea_v1_etxea_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_etxea_v1_etxea_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_etxea_v1_etxea_proto_goTypes = []interface{}{
-	(*Empty)(nil), // 0: etxea.v1.Empty
+	(*BindRequest)(nil),      // 0: etxea.v1.BindRequest
+	(*BindResponse)(nil),     // 1: etxea.v1.BindResponse
+	(*GetFlagsRequest)(nil),  // 2: etxea.v1.GetFlagsRequest
+	(*GetFlagsResponse)(nil), // 3: etxea.v1.GetFlagsResponse
+	(*Flag)(nil),             // 4: etxea.v1.Flag
+	(*ParseRequest)(nil),     // 5: etxea.v1.ParseRequest
+	(*ParseResponse)(nil),    // 6: etxea.v1.ParseResponse
 }
 var file_etxea_v1_etxea_proto_depIdxs = []int32{
-	0, // 0: etxea.v1.BindingService.Bind:input_type -> etxea.v1.Empty
-	0, // 1: etxea.v1.FlagService.Define:input_type -> etxea.v1.Empty
-	0, // 2: etxea.v1.BindingService.Bind:output_type -> etxea.v1.Empty
-	0, // 3: etxea.v1.FlagService.Define:output_type -> etxea.v1.Empty
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: etxea.v1.GetFlagsResponse.flags:type_name -> etxea.v1.Flag
+	0, // 1: etxea.v1.BindingService.Bind:input_type -> etxea.v1.BindRequest
+	2, // 2: etxea.v1.FlagService.GetFlags:input_type -> etxea.v1.GetFlagsRequest
+	5, // 3: etxea.v1.FlagService.Parse:input_type -> etxea.v1.ParseRequest
+	1, // 4: etxea.v1.BindingService.Bind:output_type -> etxea.v1.BindResponse
+	3, // 5: etxea.v1.FlagService.GetFlags:output_type -> etxea.v1.GetFlagsResponse
+	6, // 6: etxea.v1.FlagService.Parse:output_type -> etxea.v1.ParseResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_etxea_v1_etxea_proto_init() }
@@ -118,7 +456,79 @@ func file_etxea_v1_etxea_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_etxea_v1_etxea_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Empty); i {
+			switch v := v.(*BindRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BindResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFlagsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFlagsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Flag); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ParseRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_etxea_v1_etxea_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ParseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -136,7 +546,7 @@ func file_etxea_v1_etxea_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_etxea_v1_etxea_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

@@ -1,6 +1,7 @@
 package etxea
 
 import (
+	"github.com/chrisdoherty4/etxea/pkg/flags"
 	"github.com/hashicorp/go-plugin"
 )
 
@@ -14,6 +15,25 @@ var Handshake = plugin.HandshakeConfig{
 }
 
 var Plugins = plugin.PluginSet{
-	FlagsPluginName:    &FlagsPlugin{},
+	flags.PluginName:   flags.NewPlugin(nil),
 	BindingsPluginName: &BindingsPlugin{},
+}
+
+type PluginDefinition struct {
+	Flags    plugin.Plugin
+	Bindings plugin.Plugin
+}
+
+func NewPluginSet(definition PluginDefinition) plugin.PluginSet {
+	set := plugin.PluginSet{}
+
+	if definition.Flags != nil {
+		set[flags.PluginName] = definition.Flags
+	}
+
+	if definition.Bindings != nil {
+		set[BindingsPluginName] = definition.Bindings
+	}
+
+	return set
 }

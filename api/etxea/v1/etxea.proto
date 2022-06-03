@@ -1,13 +1,53 @@
 syntax = "proto3";
 package etxea.v1;
 
+// BindingService is a service providing binding points for stages within program execution.
 service BindingService {
-    rpc Bind(Empty) returns (Empty);
+    rpc Bind(BindRequest) returns (BindResponse);
 }
 
+// TODO(chrisdoherty4) Define stage binding.
+message BindRequest {}
+message BindResponse {}
+
+// FlagService is a service used by a plugin to bind arbitrary flags to CLI commands.
 service FlagService {
-    rpc Define(Empty) returns (Empty);
+    rpc GetFlags(GetFlagsRequest) returns (GetFlagsResponse);
+    rpc Parse(ParseRequest) returns (ParseResponse);
 }
 
+// GetFlagsRequest is dispatched when the host process asks a flag set to populate on a CLI command.
+message GetFlagsRequest {
+    // cid is a command identifier that uniquely identifies a command registered on the CLI. cids
+    // take the form `create.cluster` where `create` is a subcommand of the root command and 
+    // `create` is a subcommand of `create`.
+    string cid = 1;
+}
 
-message Empty {}
+// GetFlagsResponse is returned when a host process asks a plugin for flags.
+message GetFlagsResponse {
+    repeated Flag flags = 1;
+}
+
+// Flag defines the properties in a CLI's flag set.
+message Flag {
+    // Name of the flag.
+    string name = 1;
+    // Description used to populate help menus.
+    string usage = 2;
+    // An optional default for the flag.
+    string default = 4;
+}
+
+// ParseRequest is dispatched when the CLI asks a plugin to parse arguments.
+message ParseRequest {
+    // cid corresponding to the response for a GetFlagsRequest. The cid will match the cid in the
+    // GetFlagsRequest.
+    string cid = 1;
+    // Args are the raw, unparsed arguments received by the CLI.
+    repeated string args = 2;
+}
+
+// PraseResponse is returned when the host process asks a plugin to parse flags. It has no fields
+// as the caller is expected to return a gRPC error should the input be invalid.
+message ParseResponse {}

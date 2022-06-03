@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/hashicorp/go-hclog v0.14.1
 	github.com/hashicorp/go-plugin v1.4.4
+	github.com/spf13/pflag v1.0.5
 	google.golang.org/grpc v1.46.2
 	google.golang.org/protobuf v1.28.0
 )

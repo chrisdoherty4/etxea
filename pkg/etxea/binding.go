@@ -25,6 +25,6 @@ func (p *BindingsPlugin) GRPCClient(ctx context.Context, broker *plugin.GRPCBrok
 
 type BindingsService struct{}
 
-func (s *BindingsService) Bind(context.Context, *etxeav1.Empty) (*etxeav1.Empty, error) {
-	return &etxeav1.Empty{}, nil
+func (s *BindingsService) Bind(context.Context, *etxeav1.BindRequest) (*etxeav1.BindResponse, error) {
+	return &etxeav1.BindResponse{}, nil
 }

@@ -29,7 +29,7 @@ func Run(args []string) error {
 	}
 
 	client := rawClient.(etxeav1.BindingServiceClient)
-	if _, err := client.Bind(context.Background(), &etxeav1.Empty{}); err != nil {
+	if _, err := client.Bind(context.Background(), &etxeav1.BindRequest{}); err != nil {
 		return err
 	}
 

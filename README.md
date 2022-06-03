@@ -8,6 +8,8 @@ A go-plugin proof of concept. The core set of packages under `pkg` house the com
 
 Can we provide pluggable CLI flags. A generic solution that can be bound to any arbitrary flag set would be useful so we can bind to multiple sub commands.
 
+Can we make flags really natural to use? I.e. what if the plugin author could define a flag set and we populate that flag set 
+
 #### Cluster bootstrap
 
 "Cluster bootstrap" is probably too specific. We might need to model stages in some capacity that leverage a provider but is there a general "bind at stage X" capability we could build? This may be hard dependent on inputs as they may differ from 1 stage vs another. Do we break this down per-plugin definition?

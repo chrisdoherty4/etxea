@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BindingServiceClient interface {
-	Bind(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error)
 }
 
 type bindingServiceClient struct {
@@ -29,8 +29,8 @@ func NewBindingServiceClient(cc grpc.ClientConnInterface) BindingServiceClient {
 	return &bindingServiceClient{cc}
 }
 
-func (c *bindingServiceClient) Bind(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *bindingServiceClient) Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindResponse, error) {
+	out := new(BindResponse)
 	err := c.cc.Invoke(ctx, "/etxea.v1.BindingService/Bind", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -42,14 +42,14 @@ func (c *bindingServiceClient) Bind(ctx context.Context, in *Empty, opts ...grpc
 // All implementations should embed UnimplementedBindingServiceServer
 // for forward compatibility
 type BindingServiceServer interface {
-	Bind(context.Context, *Empty) (*Empty, error)
+	Bind(context.Context, *BindRequest) (*BindResponse, error)
 }
 
 // UnimplementedBindingServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedBindingServiceServer struct {
 }
 
-func (UnimplementedBindingServiceServer) Bind(context.Context, *Empty) (*Empty, error) {
+func (UnimplementedBindingServiceServer) Bind(context.Context, *BindRequest) (*BindResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Bind not implemented")
 }
 
@@ -65,7 +65,7 @@ func RegisterBindingServiceServer(s grpc.ServiceRegistrar, srv BindingServiceSer
 }
 
 func _BindingService_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(BindRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func _BindingService_Bind_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/etxea.v1.BindingService/Bind",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BindingServiceServer).Bind(ctx, req.(*Empty))
+		return srv.(BindingServiceServer).Bind(ctx, req.(*BindRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -102,7 +102,8 @@ var BindingService_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FlagServiceClient interface {
-	Define(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
+	Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error)
 }
 
 type flagServiceClient struct {
@@ -113,9 +114,18 @@ func NewFlagServiceClient(cc grpc.ClientConnInterface) FlagServiceClient {
 	return &flagServiceClient{cc}
 }
 
-func (c *flagServiceClient) Define(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/etxea.v1.FlagService/Define", in, out, opts...)
+func (c *flagServiceClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+	out := new(GetFlagsResponse)
+	err := c.cc.Invoke(ctx, "/etxea.v1.FlagService/GetFlags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flagServiceClient) Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error) {
+	out := new(ParseResponse)
+	err := c.cc.Invoke(ctx, "/etxea.v1.FlagService/Parse", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,15 +136,19 @@ func (c *flagServiceClient) Define(ctx context.Context, in *Empty, opts ...grpc.
 // All implementations should embed UnimplementedFlagServiceServer
 // for forward compatibility
 type FlagServiceServer interface {
-	Define(context.Context, *Empty) (*Empty, error)
+	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
+	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
 }
 
 // UnimplementedFlagServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedFlagServiceServer struct {
 }
 
-func (UnimplementedFlagServiceServer) Define(context.Context, *Empty) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Define not implemented")
+func (UnimplementedFlagServiceServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFlags not implemented")
+}
+func (UnimplementedFlagServiceServer) Parse(context.Context, *ParseRequest) (*ParseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Parse not implemented")
 }
 
 // UnsafeFlagServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -148,20 +162,38 @@ func RegisterFlagServiceServer(s grpc.ServiceRegistrar, srv FlagServiceServer) {
 	s.RegisterService(&FlagService_ServiceDesc, srv)
 }
 
-func _FlagService_Define_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+func _FlagService_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFlagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FlagServiceServer).Define(ctx, in)
+		return srv.(FlagServiceServer).GetFlags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/etxea.v1.FlagService/Define",
+		FullMethod: "/etxea.v1.FlagService/GetFlags",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlagServiceServer).Define(ctx, req.(*Empty))
+		return srv.(FlagServiceServer).GetFlags(ctx, req.(*GetFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FlagService_Parse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlagServiceServer).Parse(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/etxea.v1.FlagService/Parse",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlagServiceServer).Parse(ctx, req.(*ParseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -174,8 +206,12 @@ var FlagService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*FlagServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Define",
-			Handler:    _FlagService_Define_Handler,
+			MethodName: "GetFlags",
+			Handler:    _FlagService_GetFlags_Handler,
+		},
+		{
+			MethodName: "Parse",
+			Handler:    _FlagService_Parse_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
